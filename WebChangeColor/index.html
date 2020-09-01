@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网页主题</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body,html{
+            height:100%;
+        }
+        li{
+            list-style:none;
+            float:left;
+        }
+        a{
+            text-decoration:none;
+            color:#333;
+        }
+
+        #outer{
+            width:500px;
+            height:100px;
+            margin:50px auto;
+        }
+        #skin li{
+            width:10px;
+            height:10px;
+            padding:5px;
+            margin-right:10px;
+            cursor: pointer;
+            /* list-style-type: disc; */
+            list-style: none;   
+        }
+        #skin li:first-child{
+            background:white;
+            border:1px solid black;
+        }
+        #skin li:nth-child(2){
+            background:black;
+            border:1px solid black;
+        }
+
+        #nav{
+            border:1px solid #fff;
+            margin-top:10px;
+            overflow: hidden;
+            height:30px;
+            background: black;
+        }
+        #nav li a{
+            padding:0px 25px;
+            line-height: 30px;
+            color:#fff;
+            border-right:1px solid #fff;
+        }
+        #nav li:last-child a{
+            border-right:0;
+        }
+    </style>
+    <!-- 主题链接 -->
+    <link rel="stylesheet" href="css/white.css">
+    <script>
+        window.onload=function(){
+            var link=document.getElementsByTagName("link")[0];
+            var skin=document.getElementById("skin").getElementsByTagName("li");
+
+            for(var i=0;i<skin.length;i++){
+                skin[i].onclick=function(){
+                    for(var a in skin){
+                        skin[a].className="";
+                    }
+                    this.className="current";
+                    link['href']="./css/"+this.id+".css";
+                    }
+                }
+        }
+    </script>
+
+</head>
+<body>
+    <div id="outer">
+        <ul id="skin">
+            <li id="black" title="夜间"></li>
+            <li id="white" title="日间"></li>
+        </ul>
+        <br/>
+        <ul id="nav">
+            <li><a href="javascript:">新闻</a></li>
+            <li><a href="javascript:">娱乐</a></li>
+            <li><a href="javascript:">体育</a></li>
+            <li><a href="javascript:">电影</a></li>
+            <li><a href="javascript:">音乐</a></li>
+            <li><a href="javascript:">旅游</a></li>
+        </ul>
+    </div>
+</body>
+</html>
