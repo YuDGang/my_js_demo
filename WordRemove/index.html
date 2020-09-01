@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字转移</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+
+        #outer{
+            width:800px;
+            height:300px;
+            padding:10px;
+            border:5px solid #CCC;
+            margin:0 auto;
+            background-color: gray;
+        }
+        #left{
+            width:300px;
+            height:100%;
+            background:#C63;
+            border-color:1px dashed #C60;
+            float:left;
+            /* maxlength:280px; */
+            font-size:16px;
+            line-height:30px;
+            color:#FFF;
+        }
+        #mid{
+            width:120px;
+            float:left;
+            margin:0 20px;
+            text-align:center;
+        }
+        #right{
+            float:right;
+            border:1px dashed black;
+            background:#FC6;
+            width:300px;
+            height:100%;
+            font-size:16px;
+            line-height:30px;
+            color:#333;
+        }
+
+        #button{
+            width:100px;
+            background-color: #F60;
+            height:30px;
+            font-size:16px;
+            line-height:30px;
+            color:#FFF;
+            border:0;
+            cursor:pointer;
+        }
+
+    </style>
+
+    <script>
+        //windows.onload在页面完全载入后(包括图片、css文件等等)执行脚本代码
+        window.onload=function(){
+            var oMid=document.getElementById("mid");
+            var oLeft=document.getElementById("left");
+            var oRight=document.getElementById("right");
+            var oBut=document.getElementById("button");
+
+            // text/mid/content
+            oBut.onclick=function(){
+    
+                if(oLeft.value == ""){
+                    alert("把文本写在左边");
+                    return;
+                }
+                
+                //每次清空右侧
+                oRight.innerHTML = "";
+
+                //文字右移
+                // 计时器，此处调用方法
+                timer = setInterval(textMove,100)
+
+                var sum = oLeft.value.length;
+                function textMove(){
+                    if(oLeft.value ==""){
+                        clearInterval(timer);
+                        return;
+                    }
+                    var str=oLeft.value;
+                    var arr=str.split("");
+                    oRight.innerHTML+=arr.shift();
+                    oLeft.value=arr.join("");
+                    arr.shift();
+                    // alert("success");
+                }         
+            }
+        }    
+    </script>
+
+</head>
+<body>
+    <div id="outer">
+        <textarea id="left" cols="20" rows="20"></textarea>
+        <div id="mid">
+            <input id="button" type="button" value="文字右移">
+            <!-- 占 -->
+        </div>
+        <div id="right"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嘿咻嘿咻</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    
+        #outer{
+            width:800px;
+            height:300px;
+            padding:10px;
+            border:5px solid #CCC;
+            margin:0 auto;
+            background-color: gray;
+        }
+        #left{
+            width:300px;
+            height:100%;
+            background: #C63;
+            border-color: 1px dashed #C60;
+            float:left;
+            font-size:18px;
+            line-height:30px;
+            color:#FFF;
+        }
+        #mid{
+            width:120px;
+            float:left;
+            margin:0 20px;
+            text-align:center;
+        }
+        #button{
+            width:100px;
+            background:#F60;
+            height:30px;
+            font-size:18px;
+            line-height:30px;
+            color:#FFF;
+            border:0;
+            cursor:pointer;
+        }
+        #right{
+            width:300px;
+            height:100%;
+            float:right;
+            border:1px dashed black;
+            background: #FC6;
+            font-size:18px;
+            line-height: 30px;
+            color:#333;
+            overflow:auto;
+        }
+        strong{
+            margin-top:10px;
+            display: inline-block;
+        }
+        #mid ul{
+            list-style: none;
+            margin:30px 15px;
+            display: none;
+        }
+        #mid ul li{
+            width:12px;
+            height:12px;
+            background:#FC6;
+            float:left;
+            margin-right:5px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oLeft=document.getElementById("left");
+            var oMid=document.getElementById("mid");
+            var oRight=document.getElementById("right");
+            var oBut=document.getElementById("button");
+
+            var oUl=oMid.getElementsByTagName("ul")[0];
+            var oLi=oMid.getElementsByTagName("li");
+            var oStr=oMid.getElementsByTagName("strong");
+            var timer=null;
+
+            //点击按钮
+            oBut.onclick=function(){
+                //左侧非空判断
+                if(oLeft.value == ""){
+                    alert("Please type the text on the left");
+                    return;
+                }
+
+                //每次清空右侧
+                oRight.innerHTML="";
+
+                // this.style.background="#ccc";
+                oUl.style.display="block";
+                
+                //文字右移
+                timer=setInterval(textMove,80)
+                
+                function textMove(){
+                    if(oLeft.value==""){
+                        clearInterval(timer);
+                        //停止进度条动画
+                        oUl.style.display="none";
+                        oBut.style.background="";
+                        return;
+                    }
+                    // 获得左侧字符串，split：字符串=>字符串数组
+                    var arr = oLeft.value.split("");
+                    // shift 加一个删一个
+                    oRight.innerHTML+=arr.shift();
+                    oLeft.value=arr.join("");
+                    arr.shift();
+                }
+
+                //循环进度条
+                var num = 0;
+                function roll(){
+                    for(var i = 0;i<oLi.length;i++){
+                        oLi[i].style.background="";
+                    }
+                    oLi[num].style.background="#f30";
+                    num++;
+                    if(num==oLi.length){
+                        num=0;
+                    }
+                }
+                setInterval(roll,80);
+
+                //“嘿咻嘿咻”动画 + JQuery
+                
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <textarea id="left" cols="20" rows="20"></textarea>
+        <div id="mid">
+            <input type="button" id="button" value="搬运">
+            <strong>0/0</strong>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>  
+        <div id="right"></div>
+    </div>
+</body>
+</html>
