@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复选框选择器（全选/反选）</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        dl{
+            width:130px;
+            border:1px solid #333;
+            border-radius: 5px;
+            text-align: center;
+            margin:20px auto;
+            padding:10px 20px;
+            background:#f2f2f2;
+        }
+        dt{
+            line-height: 40px;
+            border-bottom:1px solid #333;
+            text-align:left;
+        }
+        dd p{
+            line-height:35px;
+        }
+        .info{
+            width:475px;
+            line-height:2em;
+            text-align:center;
+            font-size:12px;
+            background: #f2f2f2;
+            margin:0 auto;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var checkAll = document.getElementById("checkAll");
+            var checkReverse = document.getElementById("checkReverse");
+            var input = document.getElementsByTagName("input");
+            var label = document.getElementsByTagName("label")[0];
+
+            function isCheckAll(){
+                for(var i = 1,n = 0; i<input.length; i++){
+                    input[i].checked && n++;
+                }
+                input[0].checked = n == input.length-1;
+				label.innerHTML = input[0].checked ? "全不选":"全选";
+
+			}
+
+			//全选/全不选
+			checkAll.onclick = function(){
+				for( var i=1; i<input.length; i++ ){
+					input[i].checked = this.checked;
+				}
+				isCheckAll();
+			}
+			//反选
+			checkReverse.onclick = function(){
+				for( var i =1; i<input.length; i++ ){
+					input[i].checked = !input[i].checked;
+				}
+				isCheckAll();
+			}
+			//根据复选个数更新全选框状态
+			for( var i=1; i<input.length; i++ ){
+
+				input[i].onclick = function(){
+					isCheckAll();
+				}
+			}
+		}
+    </script>
+</head>
+<body>
+    <dl>
+		<dt>
+            <input type="checkbox" id="checkAll">
+            <label>全选</label>
+            <a href="javascript:" id="checkReverse">反选</a>
+        </dt>
+        <dd>
+            <p><label><input type="checkbox">选项（0）</label></p>
+            <p><label><input type="checkbox">选项（1）</label></p>
+            <p><label><input type="checkbox">选项（2）</label></p>
+            <p><label><input type="checkbox">选项（3）</label></p>
+            <p><label><input type="checkbox">选项（4）</label></p>
+            <p><label><input type="checkbox">选项（5）</label></p>
+            <p><label><input type="checkbox">选项（6）</label></p>
+            <p><label><input type="checkbox">选项（7）</label></p>
+            <p><label><input type="checkbox">选项（8）</label></p>
+            <p><label><input type="checkbox">选项（9）</label></p>
+        </dd>
+    </dl>
+</body>
+</html>
